@@ -1,46 +1,64 @@
 function showTime() {
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let seconds = date.getSeconds();
 
-    let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
+  let formatHours = convertFormat(hours);
 
-    let formatHours = convertFormat(hours);
+  hours = checkTime(hours);
 
-    hours = checkTime(hours);
-
-    hours = addZero(hours);
-    minutes = addZero(minutes);
-    seconds = addZero(seconds);
-    document.getElementById('clock').innerHTML = `${hours} : ${minutes} : ${seconds}
-    ${formatHours}`
-
+  hours = addZero(hours);
+  minutes = addZero(minutes);
+  seconds = addZero(seconds);
+  document.getElementById(
+    "clock"
+  ).innerHTML = `${hours} : ${minutes} : ${seconds}
+    ${formatHours}`;
 }
 
 function convertFormat(time) {
-    let format = "AM"
-    if (time >= 12) {
-        format = "PM"
-    }
-    return format;
+  let format = "AM";
+  if (time >= 12) {
+    format = "PM";
+  }
+  return format;
 }
 
 function checkTime(time) {
-    if (time > 12) {
-        time = time - 12;
-    }
-    if (time === 0) {
-        time = 12;
-    }
-    return time;
+  if (time > 12) {
+    time = time - 12;
+  }
+  if (time === 0) {
+    time = 12;
+  }
+  return time;
 }
 
 function addZero(time) {
-    if (time < 10) {
-        time = "0" + time;
-    }
-    return time;
+  if (time < 10) {
+    time = "0" + time;
+  }
+  return time;
 }
 
-showTime()
-setInterval(showTime, 1000)
+function setBgGreet() {
+  let date = new Date(),
+    hour = date.getHours();
+
+  if (hour < 12) {
+    // Morning
+    greeting.textContent = "Good Morning ";
+  } else if (hour < 12) {
+    // Afternoon
+    greeting.textContent = "Good Afternoon! ";
+  } else {
+    // Evening
+    greeting.textContent = "Good Evening! ";
+    document.body.style.color = "white";
+  }
+}
+
+setBgGreet();
+showTime();
+setInterval(showTime, 1000);
