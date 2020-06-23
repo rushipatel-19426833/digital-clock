@@ -1,8 +1,9 @@
+// variable declaration
 function showTime() {
   let date = new Date();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let seconds = date.getSeconds();
+  let hours = date.getHours(); // get hours
+  let minutes = date.getMinutes(); // get minutes
+  let seconds = date.getSeconds(); // get seconds
 
   let formatHours = convertFormat(hours);
 
@@ -11,12 +12,14 @@ function showTime() {
   hours = addZero(hours);
   minutes = addZero(minutes);
   seconds = addZero(seconds);
+  // get time and present them in HH:MM:SS format
   document.getElementById(
     "clock"
   ).innerHTML = `${hours} : ${minutes} : ${seconds}
     ${formatHours}`;
 }
 
+// Converting the 24Hr time to 12Hr time with AM and PM
 function convertFormat(time) {
   let format = "AM";
   if (time >= 12) {
@@ -42,18 +45,24 @@ function addZero(time) {
   return time;
 }
 
+// This part of the code I have taken from LIZ's codepen: https://codepen.io/lizcoultersmith/pen/abOKjGj
+/* With this code the greetings for afternoon was not working so i have changed the if statement so there are three different greeting that user will get based on the time.*/
+
 function setBgGreet() {
   let date = new Date(),
     hour = date.getHours();
 
+  // Morning
   if (hour < 12) {
-    // Morning
-    greeting.textContent = "Good Morning ";
-  } else if (hour < 12) {
-    // Afternoon
+    greeting.textContent = "Good Morning. Have a nice day!!";
+  }
+  // Afternoon
+  else if (hour >= 12 && hour <= 18) {
     greeting.textContent = "Good Afternoon! ";
-  } else {
-    // Evening
+  }
+
+  // Evening
+  else if (hour >= 18 && hour <= 24) {
     greeting.textContent = "Good Evening! ";
     document.body.style.color = "white";
   }
